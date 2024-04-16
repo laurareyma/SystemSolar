@@ -1,7 +1,26 @@
-#Crear una función que va a calcular la fuerza
-
 import math
 import numpy as np
+
+class Planeta:
+  def __init__(self, peso, posX, posY, posZ, VoX, VoY, VoZ):
+    self.peso = peso*1000
+    self.posX = posX*1000
+    self.posY = posY*1000
+    self.posZ = posZ*1000
+    self.VoX = VoX*1000
+    self.VoY = VoY*1000
+    self.VoZ = VoZ*1000
+
+Mercurio = Planeta()
+Venus = Planeta()
+Tierra = Planeta()
+Marte = Planeta()
+Saturno = Planeta()
+Urano = Planeta()
+Jupiter = Planeta()
+Neptuno = Planeta()
+
+
 def fuerza(m1, m2, r1, r2):
 
     #Función que calcula la gravedad entre un objeto de masa m1 y posición r1 
