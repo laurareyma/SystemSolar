@@ -83,7 +83,7 @@ def AproRK(time, mass, position, speed, acceleration, timeStep, timeLimit):
     l4 = timeStep * (accelerationArray[-1] + k3)
     positionArray = np.append(positionArray, positionArray[-1] + (k1 + 2*k2 + 2*k3 + k4)/6)
     speedArray = np.append(speedArray, speedArray[-1] + (l1 + 2*l2 + 2*l3 + l4)/6)
-    accelerationArray = np.append(accelerationArray, accelerationCalc(mass, positionArray[-1], speedArray[-1]))
+    accelerationArray = np.append(accelerationArray, accelerationCalc(planet))
     timeStepArray = np.append(timeStepArray, timeStep)
     timeLimitArray = np.append(timeLimitArray, timeLimit)
 
@@ -155,3 +155,30 @@ for planet in Planets:
 
 
 
+#AproRK function call for each planet
+timeArray_Sol, positionArray_Sol, speedArray_Sol, accelerationArray_Sol, timeStepArray_Sol, timeLimitArray_Sol = AproRK(0, Sol.mass, Sol.position, Sol.speed, Sol.acceleration, 1, 100)
+timeArray_Mercurio, positionArray_Mercurio, speedArray_Mercurio, accelerationArray_Mercurio, timeStepArray_Mercurio, timeLimitArray_Mercurio = AproRK(0, Mercurio.mass, Mercurio.position, Mercurio.speed, Mercurio.acceleration, 1, 100)
+timeArray_Venus, positionArray_Venus, speedArray_Venus, accelerationArray_Venus, timeStepArray_Venus, timeLimitArray_Venus = AproRK(0, Venus.mass, Venus.position, Venus.speed, Venus.acceleration, 1, 100)
+timeArray_Tierra, positionArray_Tierra, speedArray_Tierra, accelerationArray_Tierra, timeStepArray_Tierra, timeLimitArray_Tierra = AproRK(0, Tierra.mass, Tierra.position, Tierra.speed, Tierra.acceleration, 1, 100)
+timeArray_Marte, positionArray_Marte, speedArray_Marte, accelerationArray_Marte, timeStepArray_Marte, timeLimitArray_Marte = AproRK(0, Marte.mass, Marte.position, Marte.speed, Marte.acceleration, 1, 100)
+timeArray_Jupiter, positionArray_Jupiter, speedArray_Jupiter, accelerationArray_Jupiter, timeStepArray_Jupiter, timeLimitArray_Jupiter = AproRK(0, Jupiter.mass, Jupiter.position, Jupiter.speed, Jupiter.acceleration, 1, 100)
+timeArray_Saturno, positionArray_Saturno, speedArray_Saturno, accelerationArray_Saturno, timeStepArray_Saturno, timeLimitArray_Saturno = AproRK(0, Saturno.mass, Saturno.position, Saturno.speed, Saturno.acceleration, 1, 100)
+timeArray_Urano, positionArray_Urano, speedArray_Urano, accelerationArray_Urano, timeStepArray_Urano, timeLimitArray_Urano = AproRK(0, Urano.mass, Urano.position, Urano.speed, Urano.acceleration, 1, 100)
+timeArray_Neptuno, positionArray_Neptuno, speedArray_Neptuno, accelerationArray_Neptuno, timeStepArray_Neptuno, timeLimitArray_Neptuno = AproRK(0, Neptuno.mass, Neptuno.position, Neptuno.speed, Neptuno.acceleration, 1, 100)
+
+#Print the position and speed of each planet
+def print_planet_info(planet):
+  print(planet.__class__.__name__)
+  print("Position:", planet.position)
+  print("Speed:", planet.speed)
+  print("Acceleration:", planet.acceleration)
+
+print_planet_info(Sol)
+print_planet_info(Mercurio)
+print_planet_info(Venus)
+print_planet_info(Tierra)
+print_planet_info(Marte)
+print_planet_info(Jupiter)
+print_planet_info(Saturno)
+print_planet_info(Urano)
+print_planet_info(Neptuno)
