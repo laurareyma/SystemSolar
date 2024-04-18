@@ -44,12 +44,52 @@ def accelerationCalc(planet1:Planet):
          pass
       else:
         temp = temp + planet1.mass*(force(planet.mass, planet.position , planet1.mass, planet1.position))
-    accl = 1/temp
+    accl = 1/temp #Se calcula la aceleración dividiendo la suma de las fuerzas entre la masa del planeta
     Planets[planetIndex].acceleration = accl
     return accl
 
-def AproRK(self, time, mass, ):
-   pass
+def AproRK(time, mass, position, speed, acceleration, timeStep, timeLimit):
+  '''Función que calcula la posición y velocidad de un planeta en un tiempo t, utilizando el método de Runge-Kutta
+  time -> tiempo en el que se quiere calcular la posición y velocidad del planetas [s]
+  mass -> masa del planeta [kg]
+  position -> posición inicial del planeta [m]
+  speed -> velocidad inicial del planeta [m/s]
+  acceleration -> aceleración del planeta [m/s^2]
+  timeStep -> paso de tiempo para el cálculo [s]
+  timeLimit -> tiempo máximo para el cálculo [s]
+  timeArray -> arreglo de tiempos en los que se calcula la posición y velocidad del planeta [s]
+  positionArray -> arreglo de posiciones del planeta en los tiempos del arreglo timeArray [m]
+  speedArray -> arreglo de velocidades del planeta en los tiempos del arreglo timeArray [m/s]
+  accelerationArray -> arreglo de aceleraciones del planeta en los tiempos del arreglo timeArray [m/s^2]
+  timeStepArray -> arreglo de pasos de tiempo para el cálculo [s]
+  timeLimitArray -> arreglo de tiempos máximos para el cálculo [s]'''
+
+  timeArray = np.array([0])
+  positionArray = np.array([position])
+  speedArray = np.array([speed])
+  accelerationArray = np.array([acceleration])
+  timeStepArray = np.array([timeStep])
+  timeLimitArray = np.array([timeLimit])
+
+  while timeArray[-1] < timeLimit:
+    timeArray = np.append(timeArray, timeArray[-1] + timeStep)
+    k1 = timeStep * speedArray[-1]
+    l1 = timeStep * accelerationArray[-1]
+    k2 = timeStep * (speedArray[-1] + l1/2)
+    l2 = timeStep * (accelerationArray[-1] + k1/2)
+    k3 = timeStep * (speedArray[-1] + l2/2)
+    l3 = timeStep * (accelerationArray[-1] + k2/2)
+    k4 = timeStep * (speedArray[-1] + l3)
+    l4 = timeStep * (accelerationArray[-1] + k3)
+    positionArray = np.append(positionArray, positionArray[-1] + (k1 + 2*k2 + 2*k3 + k4)/6)
+    speedArray = np.append(speedArray, speedArray[-1] + (l1 + 2*l2 + 2*l3 + l4)/6)
+    accelerationArray = np.append(accelerationArray, accelerationCalc(mass, positionArray[-1], speedArray[-1]))
+    timeStepArray = np.append(timeStepArray, timeStep)
+    timeLimitArray = np.append(timeLimitArray, timeLimit)
+
+  return timeArray, positionArray, speedArray, accelerationArray, timeStepArray, timeLimitArray
+
+
 
 Planets = []
 
@@ -112,4 +152,6 @@ Planets.append(Neptuno)
 #Acceleration calculus for each planet using accelrationCalc() function
 for planet in Planets:
    accelerationCalc(planet)
+
+
 
