@@ -35,10 +35,11 @@ def force(m1, m2, r1, r2):
     return F
 
 def accelerationCalc(planet1:Planet):
-    temp = 0
-    planetIndex = 0
-    for planet in Planets:
-      if planet == planet1:
+    #Función que calcula la aceleración de un planeta, sumando las fuerzas ejercidas por los demás planetas
+    temp = 0 #Variable temporal para almacenar la suma de las fuerzas
+    planetIndex = 0 #Variable para almacenar el índice del planeta en la lista de planetas
+    for planet in Planets: 
+      if planet == planet1: #Si el planeta es el mismo que el que se está calculando, se pasa al siguiente planeta
          planetIndex = Planets.index(planet)
          pass
       else:
@@ -97,6 +98,7 @@ Neptuno = Planet(1.024E+26,
                   [2.803376699079932E-01, 5.458300376201279E+00, -1.186959253968582E-01],
                   None)
 
+#Añadir los planetas a la lista de planetas
 Planets.append(Sol)
 Planets.append(Mercurio)
 Planets.append(Venus)
@@ -110,3 +112,4 @@ Planets.append(Neptuno)
 #Acceleration calculus for each planet using accelrationCalc() function
 for planet in Planets:
    accelerationCalc(planet)
+
